@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>AgentPulse™ — AI Estate Intelligence | agentpulse.live</title>
+<link rel="canonical" href="https://agentpulse.live"/>
+<meta property="og:url" content="https://agentpulse.live"/>
+<meta property="og:title" content="AgentPulse™ — AI Estate Intelligence"/>
+<meta property="og:description" content="Behavioral intelligence platform for NVIDIA AI Factory. Detect drift, resolve conflicts, auto-remediate agent failures before they become business problems."/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Neue+Montreal:wght@300;400;500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:       #04070D;
+  --surface:  #080F1A;
+  --card:     #0C1521;
+  --nv:       #76B900;
+  --nv2:      rgba(118,185,0,0.08);
+  --blue:     #00C8FF;
+  --blue2:    rgba(0,200,255,0.07);
+  --white:    #EDF2F7;
+  --t2:       rgba(237,242,247,0.6);
+  --t3:       rgba(237,242,247,0.3);
+  --border:   rgba(118,185,0,0.12);
+  --b2:       rgba(255,255,255,0.06);
+  --danger:   #FF453A;
+  --warn:     #FF9F0A;
+}
+
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+
+body {
+  background:var(--bg);
+  color:var(--white);
+  font-family:'Syne',sans-serif;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* ── CUSTOM CURSOR ── */
+.cursor {
+  position:fixed; width:10px; height:10px;
+  background:var(--nv); border-radius:50%;
+  pointer-events:none; z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:transform 0.1s, width 0.2s, height 0.2s;
+  mix-blend-mode:difference;
+}
+.cursor-ring {
+  position:fixed; width:36px; height:36px;
+  border:1px solid rgba(118,185,0,0.4);
+  border-radius:50%; pointer-events:none; z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:transform 0.15s ease-out, width 0.3s, height 0.3s;
+}
+.cursor.active { width:6px; height:6px; }
+.cursor-ring.active { width:52px; height:52px; border-color:var(--nv); }
+
+/* ── CANVAS BACKGROUND ── */
+#bg-canvas {
+  position:fixed; top:0; left:0;
+  width:100%; height:100%;
+  z-index:0; pointer-events:none;
+}
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  padding:20px 60px;
+  display:flex; align-items:center; justify-content:space-between;
+  background:rgba(4,7,13,0.7);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:all 0.3s;
+}
+nav.scrolled { padding:14px 60px; }
+.nav-logo {
+  font-family:'Fraunces',serif;
+  font-size:22px; font-weight:600;
+  letter-spacing:-0.02em; color:var(--white);
+}
+.nav-logo span { color:var(--nv); }
+.nav-logo sup { font-size:10px; color:var(--t3); vertical-align:super; font-family:'DM Mono',monospace; }
+.nav-links { display:flex; align-items:center; gap:36px; }
+.nav-links a {
+  font-family:'DM Mono',monospace; font-size:9px;
+  color:var(--t3); text-decoration:none; letter-spacing:0.16em;
+  text-transform:uppercase; transition:color 0.2s;
+}
+.nav-links a:hover { color:var(--nv); }
+.nav-cta {
+  padding:10px 24px; border-radius:6px;
+  background:var(--nv); color:#04070D;
+  font-family:'Syne',sans-serif; font-size:12px; font-weight:700;
+  text-decoration:none; letter-spacing:0.04em;
+  transition:all 0.2s;
+  box-shadow:0 0 20px rgba(118,185,0,0.3);
+}
+.nav-cta:hover { box-shadow:0 0 32px rgba(118,185,0,0.5); transform:translateY(-1px); }
+
+/* ── SECTIONS ── */
+section { position:relative; z-index:1; }
+
+/* ── HERO ── */
+.hero {
+  min-height:100vh;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center;
+  padding:120px 60px 80px;
+  position:relative;
+}
+
+.hero-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:6px 16px; border-radius:100px;
+  background:rgba(118,185,0,0.08);
+  border:1px solid rgba(118,185,0,0.25);
+  font-family:'DM Mono',monospace; font-size:9px;
+  color:var(--nv); letter-spacing:0.16em;
+  margin-bottom:32px;
+  animation:fadeUp 0.8s ease 0.2s both;
+}
+.hero-badge-dot {
+  width:6px; height:6px; border-radius:50%;
+  background:var(--nv);
+  animation:pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:0.4;transform:scale(0.7)}
+}
+
+.hero-title {
+  font-family:'Fraunces',serif;
+  font-size:clamp(52px,8vw,96px);
+  font-weight:300; line-height:1.02;
+  letter-spacing:-0.03em;
+  max-width:900px;
+  animation:fadeUp 0.8s ease 0.4s both;
+}
+.hero-title em {
+  font-style:italic; color:var(--nv);
+  display:block;
+}
+.hero-title strong {
+  font-weight:600; color:var(--blue);
+}
+
+.hero-sub {
+  font-family:'DM Mono',monospace;
+  font-size:13px; color:var(--t2);
+  line-height:1.8; max-width:580px;
+  margin:28px auto 48px;
+  animation:fadeUp 0.8s ease 0.6s both;
+}
+
+.hero-actions {
+  display:flex; gap:16px; align-items:center; justify-content:center;
+  animation:fadeUp 0.8s ease 0.8s both;
+}
+.btn-primary {
+  padding:14px 32px; border-radius:8px;
+  background:var(--nv); color:#04070D;
+  font-family:'Syne',sans-serif; font-size:13px; font-weight:700;
+  text-decoration:none; letter-spacing:0.04em;
+  transition:all 0.25s;
+  box-shadow:0 0 30px rgba(118,185,0,0.35);
+  display:inline-flex; align-items:center; gap:8px;
+}
+.btn-primary:hover { box-shadow:0 0 50px rgba(118,185,0,0.55); transform:translateY(-2px); }
+.btn-ghost {
+  padding:14px 32px; border-radius:8px;
+  border:1px solid var(--b2); color:var(--t2);
+  font-family:'Syne',sans-serif; font-size:13px; font-weight:600;
+  text-decoration:none; transition:all 0.25s;
+  display:inline-flex; align-items:center; gap:8px;
+}
+.btn-ghost:hover { border-color:var(--nv); color:var(--nv); }
+
+/* ── PULSE VIZ ── */
+.hero-viz {
+  margin-top:72px;
+  width:100%; max-width:900px;
+  height:120px; position:relative;
+  animation:fadeUp 0.8s ease 1s both;
+}
+#pulse-canvas { width:100%; height:100%; }
+
+/* ── MARQUEE ── */
+.marquee-wrap {
+  padding:20px 0; overflow:hidden;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:rgba(8,15,26,0.8);
+}
+.marquee-track {
+  display:flex; gap:60px;
+  animation:marquee 30s linear infinite;
+  white-space:nowrap;
+}
+.marquee-track:hover { animation-play-state:paused; }
+.marquee-item {
+  display:flex; align-items:center; gap:10px;
+  font-family:'DM Mono',monospace; font-size:9px;
+  color:var(--t3); letter-spacing:0.14em; flex-shrink:0;
+}
+.marquee-dot { width:4px; height:4px; border-radius:50%; background:var(--nv); }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ── PROBLEM ── */
+.problem {
+  padding:120px 60px;
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:80px; align-items:center;
+  max-width:1200px; margin:0 auto;
+}
+.section-label {
+  font-family:'DM Mono',monospace; font-size:9px;
+  color:var(--nv); letter-spacing:0.2em;
+  margin-bottom:20px; display:block;
+}
+.section-title {
+  font-family:'Fraunces',serif;
+  font-size:clamp(36px,4vw,52px);
+  font-weight:300; line-height:1.1;
+  letter-spacing:-0.02em; margin-bottom:24px;
+}
+.section-title em { font-style:italic; color:var(--blue); }
+.section-body {
+  font-size:14px; color:var(--t2);
+  line-height:1.9; margin-bottom:32px;
+}
+
+.problem-cards { display:flex; flex-direction:column; gap:12px; }
+.problem-card {
+  padding:18px 22px;
+  background:var(--card); border-radius:10px;
+  border:1px solid var(--b2);
+  display:flex; gap:14px; align-items:flex-start;
+  transition:all 0.3s;
+  opacity:0; transform:translateX(20px);
+}
+.problem-card.visible {
+  opacity:1; transform:translateX(0);
+}
+.problem-card:hover {
+  border-color:rgba(255,67,58,0.3);
+  background:rgba(255,67,58,0.04);
+}
+.problem-icon { font-size:18px; margin-top:2px; flex-shrink:0; }
+.problem-card-title { font-size:13px; font-weight:700; margin-bottom:4px; color:var(--white); }
+.problem-card-body { font-size:11px; color:var(--t2); line-height:1.65; }
+
+/* ── SOLUTION ── */
+.solution {
+  padding:80px 60px 120px;
+  max-width:1200px; margin:0 auto;
+}
+.solution-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px; margin-top:60px;
+}
+.sol-card {
+  padding:28px 24px;
+  background:var(--card); border-radius:12px;
+  border:1px solid var(--border);
+  position:relative; overflow:hidden;
+  transition:all 0.3s;
+  opacity:0; transform:translateY(20px);
+}
+.sol-card.visible { opacity:1; transform:translateY(0); }
+.sol-card::before {
+  content:''; position:absolute;
+  top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,transparent,var(--nv),transparent);
+  opacity:0; transition:opacity 0.3s;
+}
+.sol-card:hover { border-color:rgba(118,185,0,0.3); transform:translateY(-4px); }
+.sol-card:hover::before { opacity:1; }
+.sol-icon {
+  width:44px; height:44px; border-radius:10px;
+  background:var(--nv2); border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px; margin-bottom:18px;
+}
+.sol-title { font-size:16px; font-weight:700; margin-bottom:8px; }
+.sol-body { font-size:11.5px; color:var(--t2); line-height:1.7; }
+.sol-tag {
+  display:inline-block; margin-top:14px;
+  padding:3px 10px; border-radius:20px;
+  font-family:'DM Mono',monospace; font-size:8px;
+  background:var(--nv2); color:var(--nv);
+  border:1px solid rgba(118,185,0,0.2);
+  letter-spacing:0.1em;
+}
+
+/* ── REASONING LOOP ── */
+.loop-section {
+  padding:100px 60px;
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.loop-inner { max-width:1200px; margin:0 auto; }
+.loop-title { text-align:center; margin-bottom:60px; }
+
+.loop-steps {
+  display:grid;
+  grid-template-columns:repeat(8,1fr);
+  gap:0; position:relative;
+}
+.loop-steps::after {
+  content:''; position:absolute;
+  top:36px; left:10%; right:10%; height:1px;
+  background:linear-gradient(90deg,transparent,var(--nv),var(--blue),var(--nv),transparent);
+  opacity:0.3;
+}
+.loop-step {
+  display:flex; flex-direction:column;
+  align-items:center; gap:12px;
+  text-align:center; position:relative; z-index:1;
+  opacity:0; transform:translateY(15px);
+  transition:all 0.4s ease;
+}
+.loop-step.visible { opacity:1; transform:translateY(0); }
+.loop-step-num {
+  width:72px; height:72px; border-radius:50%;
+  background:var(--card); border:1px solid var(--border);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  font-family:'DM Mono',monospace;
+  transition:all 0.3s;
+}
+.loop-step-num .num {
+  font-size:10px; color:var(--t3); margin-bottom:2px;
+}
+.loop-step-num .icon { font-size:20px; }
+.loop-step:hover .loop-step-num {
+  border-color:var(--nv);
+  background:var(--nv2);
+  box-shadow:0 0 20px rgba(118,185,0,0.2);
+}
+.loop-step-name {
+  font-family:'DM Mono',monospace; font-size:7.5px;
+  color:var(--t3); letter-spacing:0.14em;
+}
+
+/* ── STATS ── */
+.stats-section {
+  padding:100px 60px;
+  max-width:1200px; margin:0 auto;
+}
+.stats-grid {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:1px; background:var(--b2);
+  border-radius:16px; overflow:hidden;
+  margin-top:60px;
+}
+.stat-card {
+  padding:44px 32px;
+  background:var(--card);
+  text-align:center;
+  transition:background 0.3s;
+}
+.stat-card:hover { background:var(--surface); }
+.stat-num {
+  font-family:'Fraunces',serif;
+  font-size:56px; font-weight:600;
+  line-height:1; letter-spacing:-0.03em;
+  margin-bottom:8px;
+}
+.stat-label {
+  font-family:'DM Mono',monospace;
+  font-size:9px; color:var(--t3);
+  letter-spacing:0.14em; line-height:1.6;
+}
+
+/* ── HOW IT WORKS ── */
+.how-section {
+  padding:100px 60px;
+  background:linear-gradient(180deg,var(--bg),var(--surface));
+  border-top:1px solid var(--border);
+}
+.how-inner { max-width:1200px; margin:0 auto; }
+.how-steps {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:80px; margin-top:60px; align-items:center;
+}
+.how-list { display:flex; flex-direction:column; gap:0; }
+.how-item {
+  display:flex; gap:20px; padding:24px 0;
+  border-bottom:1px solid var(--b2);
+  opacity:0; transform:translateX(-20px);
+  transition:all 0.4s ease;
+  cursor:pointer;
+}
+.how-item.visible { opacity:1; transform:translateX(0); }
+.how-item.active .how-item-num { background:var(--nv); color:#04070D; border-color:var(--nv); }
+.how-item-num {
+  width:36px; height:36px; border-radius:50%; flex-shrink:0;
+  background:transparent; border:1px solid var(--b2);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'DM Mono',monospace; font-size:11px;
+  color:var(--t3); transition:all 0.3s; margin-top:2px;
+}
+.how-item-title { font-size:15px; font-weight:700; margin-bottom:6px; }
+.how-item-body { font-size:11.5px; color:var(--t2); line-height:1.65; }
+
+.how-visual {
+  background:var(--card); border-radius:16px;
+  border:1px solid var(--border); padding:32px;
+  min-height:400px; display:flex;
+  flex-direction:column; justify-content:space-between;
+  position:relative; overflow:hidden;
+}
+.how-visual::before {
+  content:''; position:absolute;
+  top:-50%; left:-50%; width:200%; height:200%;
+  background:radial-gradient(ellipse at center,rgba(118,185,0,0.04) 0%,transparent 60%);
+}
+.how-visual-tag {
+  font-family:'DM Mono',monospace; font-size:8px;
+  color:var(--nv); letter-spacing:0.16em;
+  margin-bottom:20px;
+}
+#how-canvas { width:100%; height:280px; }
+
+/* ── PARTNERS ── */
+.partners-section {
+  padding:80px 60px;
+  border-top:1px solid var(--border);
+  text-align:center;
+}
+.partners-inner { max-width:1000px; margin:0 auto; }
+.partners-title {
+  font-family:'DM Mono',monospace; font-size:9px;
+  color:var(--t3); letter-spacing:0.2em; margin-bottom:40px;
+}
+.partners-grid {
+  display:flex; flex-wrap:wrap;
+  align-items:center; justify-content:center;
+  gap:40px 60px;
+}
+.partner-item {
+  font-family:'Syne',sans-serif; font-size:16px;
+  font-weight:700; color:var(--t3);
+  letter-spacing:0.04em; transition:color 0.2s;
+  display:flex; align-items:center; gap:8px;
+}
+.partner-item:hover { color:var(--t2); }
+.partner-item .dot { width:5px; height:5px; border-radius:50%; background:var(--nv); }
+
+/* ── TESTIMONIAL ── */
+.testimonial-section {
+  padding:100px 60px;
+  max-width:900px; margin:0 auto;
+  text-align:center;
+}
+.testimonial-quote {
+  font-family:'Fraunces',serif;
+  font-size:clamp(24px,3vw,38px);
+  font-weight:300; line-height:1.4;
+  font-style:italic; color:var(--white);
+  margin-bottom:32px;
+}
+.testimonial-quote strong { color:var(--nv); font-style:normal; }
+.testimonial-author {
+  font-family:'DM Mono',monospace; font-size:9px;
+  color:var(--t3); letter-spacing:0.16em;
+}
+
+/* ── CTA ── */
+.cta-section {
+  padding:120px 60px;
+  text-align:center;
+  position:relative; overflow:hidden;
+}
+.cta-section::before {
+  content:''; position:absolute;
+  inset:0; background:radial-gradient(ellipse 800px 400px at 50% 50%,rgba(118,185,0,0.06),transparent);
+}
+.cta-inner { position:relative; z-index:1; max-width:700px; margin:0 auto; }
+.cta-title {
+  font-family:'Fraunces',serif;
+  font-size:clamp(42px,6vw,72px);
+  font-weight:300; line-height:1.05;
+  letter-spacing:-0.03em; margin-bottom:24px;
+}
+.cta-title em { font-style:italic; color:var(--nv); }
+.cta-sub {
+  font-family:'DM Mono',monospace;
+  font-size:12px; color:var(--t2);
+  line-height:1.8; margin-bottom:48px;
+}
+.cta-actions { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+
+/* ── FOOTER ── */
+footer {
+  padding:48px 60px;
+  border-top:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.footer-brand {
+  font-family:'Fraunces',serif; font-size:18px;
+  font-weight:600; color:var(--t3);
+}
+.footer-brand span { color:var(--nv); }
+.footer-copy {
+  font-family:'DM Mono',monospace; font-size:8px;
+  color:var(--t3); letter-spacing:0.12em;
+}
+.footer-links { display:flex; gap:24px; }
+.footer-links a {
+  font-family:'DM Mono',monospace; font-size:8.5px;
+  color:var(--t3); text-decoration:none; letter-spacing:0.1em;
+  transition:color 0.2s;
+}
+.footer-links a:hover { color:var(--nv); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity:0; }
+  to   { opacity:1; }
+}
+
+.reveal {
+  opacity:0; transform:translateY(30px);
+  transition:opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ── GLOW BLOB ── */
+.glow-blob {
+  position:absolute; border-radius:50%;
+  filter:blur(80px); pointer-events:none;
+  animation:blob-move 12s ease-in-out infinite;
+}
+@keyframes blob-move {
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(30px,-20px) scale(1.05)}
+  66%{transform:translate(-20px,15px) scale(0.97)}
+}
+
+/* chip */
+.chip {
+  display:inline-flex; align-items:center;
+  padding:3px 10px; border-radius:20px;
+  font-family:'DM Mono',monospace; font-size:8px;
+  letter-spacing:0.08em;
+}
+.chip-nv  { background:rgba(118,185,0,0.1); color:var(--nv); border:1px solid rgba(118,185,0,0.2); }
+.chip-blue{ background:rgba(0,200,255,0.08); color:var(--blue); border:1px solid rgba(0,200,255,0.2); }
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Background Canvas -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">Agent<span>Pulse</span><sup>™</sup></div>
+  <div class="nav-links">
+    <a href="#problem">Problem</a>
+    <a href="#solution">Platform</a>
+    <a href="#how">How It Works</a>
+    <a href="#stats">Results</a>
+  </div>
+  <a href="#cta" class="nav-cta">Request Demo →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="glow-blob" style="width:500px;height:500px;background:rgba(118,185,0,0.04);top:-100px;left:-100px;"></div>
+  <div class="glow-blob" style="width:400px;height:400px;background:rgba(0,200,255,0.03);top:100px;right:-80px;animation-delay:-4s;"></div>
+
+  <div class="hero-badge">
+    <div class="hero-badge-dot"></div>
+    NVIDIA AI FACTORY NATIVE · BEHAVIORAL INTELLIGENCE
+  </div>
+
+  <h1 class="hero-title">
+    Your AI agents are running.
+    <em>Are they behaving?</em>
+  </h1>
+
+  <p class="hero-sub">
+    AgentPulse is the behavioral intelligence platform for enterprise AI Factories —
+    detecting drift, resolving conflicts, and autonomously remediating agent failures
+    before they become business problems.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#cta" class="btn-primary">
+      <span>▶</span> See Live Demo
+    </a>
+    <a href="#solution" class="btn-ghost">
+      Explore Platform →
+    </a>
+  </div>
+
+  <div class="hero-viz">
+    <canvas id="pulse-canvas"></canvas>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marquee">
+    <div class="marquee-item"><div class="marquee-dot"></div>BEHAVIORAL DRIFT DETECTION</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>INSTRUCTION CONFLICT RESOLUTION</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>OPENSHELL POLICY AUTOMATION</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>AI FITNESS INDEX™</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>NVIDIA NIM NATIVE</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>DCGM GPU TELEMETRY</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>6 REASONING AGENTS</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>8-STEP CAUSAL REASONING</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>COST-PER-OUTCOME ATTRIBUTION</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>EU AI ACT COMPLIANCE</div>
+    <!-- duplicate for seamless loop -->
+    <div class="marquee-item"><div class="marquee-dot"></div>BEHAVIORAL DRIFT DETECTION</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>INSTRUCTION CONFLICT RESOLUTION</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>OPENSHELL POLICY AUTOMATION</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>AI FITNESS INDEX™</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>NVIDIA NIM NATIVE</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>DCGM GPU TELEMETRY</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>6 REASONING AGENTS</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>8-STEP CAUSAL REASONING</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>COST-PER-OUTCOME ATTRIBUTION</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>EU AI ACT COMPLIANCE</div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section id="problem" style="padding:100px 0;">
+  <div class="problem">
+    <div class="reveal">
+      <span class="section-label">THE PROBLEM</span>
+      <h2 class="section-title">
+        Observability tells you
+        the system is <em>up.</em>
+        Not that the AI is right.
+      </h2>
+      <p class="section-body">
+        Every enterprise running NVIDIA AI Factory can monitor GPU utilization
+        and API uptime. What no one can see is whether the agents running on
+        that infrastructure are still doing what they were deployed to do.
+        Quality drifts silently. Agents contradict each other. Inference spend
+        vanishes into unmeasured outcomes.
+      </p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <span class="chip chip-nv">Datadog doesn't see this</span>
+        <span class="chip chip-blue">Mission Control doesn't see this</span>
+      </div>
+    </div>
+
+    <div class="problem-cards">
+      <div class="problem-card" style="transition-delay:0.1s">
+        <div class="problem-icon">📉</div>
+        <div>
+          <div class="problem-card-title">Silent behavioral drift</div>
+          <div class="problem-card-body">Agent quality drops 23 points over 6 hours. The model is up. The API responds. Nobody knows until a business outcome fails.</div>
+        </div>
+      </div>
+      <div class="problem-card" style="transition-delay:0.2s">
+        <div class="problem-icon">⚡</div>
+        <div>
+          <div class="problem-card-title">Instruction conflicts</div>
+          <div class="problem-card-body">Two agents in the same pipeline develop contradictory thresholds. No alert fires. The outputs have never been reviewed or approved by anyone.</div>
+        </div>
+      </div>
+      <div class="problem-card" style="transition-delay:0.3s">
+        <div class="problem-icon">💸</div>
+        <div>
+          <div class="problem-card-title">Spend without outcomes</div>
+          <div class="problem-card-body">$2.4M in annual inference spend. Zero traceability to business value. The CFO asks. Nobody has an answer.</div>
+        </div>
+      </div>
+      <div class="problem-card" style="transition-delay:0.4s">
+        <div class="problem-icon">⚖️</div>
+        <div>
+          <div class="problem-card-title">Regulatory exposure</div>
+          <div class="problem-card-body">EU AI Act enforcement begins August 2026. If a regulator asks what your agent did at session 47 — without AgentPulse, you have no answer.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section id="solution" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="solution">
+    <div class="reveal" style="text-align:center;max-width:700px;margin:0 auto;">
+      <span class="section-label">THE PLATFORM</span>
+      <h2 class="section-title">
+        Six reasoning agents.<br/>
+        One <em>unified intelligence</em>.
+      </h2>
+      <p style="font-family:'DM Mono',monospace;font-size:12px;color:var(--t2);line-height:1.8;">
+        AgentPulse deploys six specialized reasoning agents that run a continuous
+        8-step causal loop across your entire AI estate — consuming GPU telemetry,
+        NIM metrics, and behavioral signals simultaneously.
+      </p>
+    </div>
+
+    <div class="solution-grid">
+      <div class="sol-card" style="transition-delay:0.1s">
+        <div class="sol-icon">◈</div>
+        <div class="sol-title">Drift Analyst</div>
+        <div class="sol-body">Root-causes behavioral drift with 8-step causal reasoning. Doesn't alert — it explains why, names the cause, and quantifies the dollar impact.</div>
+        <span class="sol-tag">OBSERVE → REPORT</span>
+      </div>
+      <div class="sol-card" style="transition-delay:0.2s">
+        <div class="sol-icon">⬡</div>
+        <div class="sol-title">Conflict Resolver</div>
+        <div class="sol-body">Determines which agent's instruction is authoritative when pipelines contradict. Generates PulseSync arbitration policies automatically.</div>
+        <span class="sol-tag">REAL-TIME</span>
+      </div>
+      <div class="sol-card" style="transition-delay:0.3s">
+        <div class="sol-icon">◆</div>
+        <div class="sol-title">Remediation Architect</div>
+        <div class="sol-body">Designs the minimum effective intervention — smallest OpenShell policy change that restores quality without disrupting downstream agents.</div>
+        <span class="sol-tag">AUTO-DEPLOY</span>
+      </div>
+      <div class="sol-card" style="transition-delay:0.4s">
+        <div class="sol-icon">◎</div>
+        <div class="sol-title">Cost Intelligence</div>
+        <div class="sol-body">Reasons about whether inference spend is justified by business outcomes. Surfaces routing changes worth $180K+ annually in savings.</div>
+        <span class="sol-tag">CFO LANGUAGE</span>
+      </div>
+      <div class="sol-card" style="transition-delay:0.5s">
+        <div class="sol-icon">▣</div>
+        <div class="sol-title">Fitness Assessor</div>
+        <div class="sol-body">Builds a longitudinal hypothesis: why is your organization in its current PwC AI cohort, and precisely what changes it. Sequenced 12-week roadmap.</div>
+        <span class="sol-tag">PwC BENCHMARK</span>
+      </div>
+      <div class="sol-card" style="transition-delay:0.6s">
+        <div class="sol-icon">★</div>
+        <div class="sol-title">Estate Orchestrator</div>
+        <div class="sol-body">The meta-agent. Coordinates all five. Decides which agents to invoke and why. Maintains a working theory about your estate's health trajectory.</div>
+        <span class="sol-tag">MASTER INTELLIGENCE</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REASONING LOOP -->
+<section class="loop-section" id="loop">
+  <div class="loop-inner">
+    <div class="loop-title reveal">
+      <span class="section-label" style="display:block;text-align:center;margin-bottom:12px;">THE REASONING ENGINE</span>
+      <h2 class="section-title" style="text-align:center;">
+        Every agent thinks before it acts.
+      </h2>
+    </div>
+    <div class="loop-steps" id="loopSteps">
+      <div class="loop-step" style="transition-delay:0.05s">
+        <div class="loop-step-num"><div class="num">01</div><div class="icon">👁</div></div>
+        <div class="loop-step-name">OBSERVE</div>
+      </div>
+      <div class="loop-step" style="transition-delay:0.1s">
+        <div class="loop-step-num"><div class="num">02</div><div class="icon">💡</div></div>
+        <div class="loop-step-name">HYPOTHESIZE</div>
+      </div>
+      <div class="loop-step" style="transition-delay:0.15s">
+        <div class="loop-step-num"><div class="num">03</div><div class="icon">🔍</div></div>
+        <div class="loop-step-name">QUERY</div>
+      </div>
+      <div class="loop-step" style="transition-delay:0.2s">
+        <div class="loop-step-num"><div class="num">04</div><div class="icon">🧠</div></div>
+        <div class="loop-step-name">REASON</div>
+      </div>
+      <div class="loop-step" style="transition-delay:0.25s">
+        <div class="loop-step-num"><div class="num">05</div><div class="icon">📋</div></div>
+        <div class="loop-step-name">PLAN</div>
+      </div>
+      <div class="loop-step" style="transition-delay:0.3s">
+        <div class="loop-step-num"><div class="num">06</div><div class="icon">⚡</div></div>
+        <div class="loop-step-name">ACT</div>
+      </div>
+      <div class="loop-step" style="transition-delay:0.35s">
+        <div class="loop-step-num"><div class="num">07</div><div class="icon">✓</div></div>
+        <div class="loop-step-name">VERIFY</div>
+      </div>
+      <div class="loop-step" style="transition-delay:0.4s">
+        <div class="loop-step-num"><div class="num">08</div><div class="icon">📊</div></div>
+        <div class="loop-step-name">REPORT</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section" id="stats">
+  <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto 0;">
+    <span class="section-label">WHAT IT DELIVERS</span>
+    <h2 class="section-title">Business outcomes,<br/><em>not just metrics.</em></h2>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--nv);" data-target="60" data-suffix="s">0s</div>
+      <div class="stat-label">MEAN TIME TO<br/>REMEDIATION</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--blue);" data-target="23" data-suffix="%">0%</div>
+      <div class="stat-label">AVERAGE QUALITY<br/>RECOVERY</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--nv);" data-prefix="$" data-target="184" data-suffix="K">$0K</div>
+      <div class="stat-label">ANNUAL ROUTING<br/>SAVINGS PER ESTATE</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--blue);" data-target="7" data-suffix="x">0x</div>
+      <div class="stat-label">ROI VS BOTTOM<br/>80% OF PEERS</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="how-inner">
+    <div class="reveal">
+      <span class="section-label">HOW IT WORKS</span>
+      <h2 class="section-title" style="max-width:500px;">
+        Connected to everything.<br/><em>Silent until it matters.</em>
+      </h2>
+    </div>
+    <div class="how-steps">
+      <div class="how-list">
+        <div class="how-item" data-step="0">
+          <div class="how-item-num">1</div>
+          <div>
+            <div class="how-item-title">Connect your AI Factory</div>
+            <div class="how-item-body">Point AgentPulse at your NIM endpoints, DCGM exporter, and Kubernetes cluster. First data appears in minutes. No agents to retrain. No code changes.</div>
+          </div>
+        </div>
+        <div class="how-item" data-step="1">
+          <div class="how-item-num">2</div>
+          <div>
+            <div class="how-item-title">Behavioral baselines form</div>
+            <div class="how-item-body">AgentPulse builds a behavioral fingerprint for every agent over 72 hours — 8 dimensions, statistical baseline, CUSUM change-point detection. Voiceprint for your AI.</div>
+          </div>
+        </div>
+        <div class="how-item" data-step="2">
+          <div class="how-item-num">3</div>
+          <div>
+            <div class="how-item-title">Drift detected, root-caused</div>
+            <div class="how-item-body">When behavior diverges, the Drift Analyst runs its 8-step reasoning loop. Not an alert — a causal explanation with confidence score and dollar impact.</div>
+          </div>
+        </div>
+        <div class="how-item" data-step="3">
+          <div class="how-item-num">4</div>
+          <div>
+            <div class="how-item-title">Auto-remediation deployed</div>
+            <div class="how-item-body">The Remediation Architect generates the minimum effective OpenShell policy. One-click approval or fully autonomous. Quality recovers in under 60 seconds.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="how-visual">
+        <div class="how-visual-tag">LIVE ESTATE INTELLIGENCE</div>
+        <canvas id="how-canvas"></canvas>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;">
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:8px;color:var(--t3);margin-bottom:3px;">ESTATE HEALTH</div>
+            <div style="font-family:'Fraunces',serif;font-size:28px;color:var(--nv);font-weight:600;" id="healthScore">82</div>
+          </div>
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:8px;color:var(--t3);margin-bottom:3px;">ACTIVE AGENTS</div>
+            <div style="font-family:'Fraunces',serif;font-size:28px;color:var(--blue);font-weight:600;">23</div>
+          </div>
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:8px;color:var(--t3);margin-bottom:3px;">DRIFTS TODAY</div>
+            <div style="font-family:'Fraunces',serif;font-size:28px;color:var(--warn);font-weight:600;">4</div>
+          </div>
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:8px;color:var(--t3);margin-bottom:3px;">AUTO-FIXED</div>
+            <div style="font-family:'Fraunces',serif;font-size:28px;color:var(--nv);font-weight:600;">4</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section class="partners-section">
+  <div class="partners-inner">
+    <div class="partners-title">BUILT ON THE NVIDIA AI FACTORY STACK</div>
+    <div class="partners-grid">
+      <div class="partner-item"><div class="dot"></div>NVIDIA NIM</div>
+      <div class="partner-item"><div class="dot"></div>OpenShell</div>
+      <div class="partner-item"><div class="dot"></div>DCGM</div>
+      <div class="partner-item"><div class="dot"></div>Dynamo 1.0</div>
+      <div class="partner-item"><div class="dot"></div>NeMo Guardrails</div>
+      <div class="partner-item"><div class="dot"></div>NGC</div>
+      <div class="partner-item"><div class="dot"></div>Kubernetes NIM Operator</div>
+      <div class="partner-item"><div class="dot"></div>Anthropic Claude</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial-section" style="border-top:1px solid var(--border);">
+  <div class="reveal">
+    <p class="testimonial-quote">
+      "The only platform looking at this problem at this depth.
+      <strong>Behavioral governance for AI agents</strong> is the
+      gap the entire industry is about to realize it has."
+    </p>
+    <div class="testimonial-author">FRANK DICKSON · IDC RESEARCH · GROUP VP</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="cta-inner reveal">
+    <h2 class="cta-title">
+      Your AI Factory is running.<br/>
+      <em>Let's make sure it's right.</em>
+    </h2>
+    <p class="cta-sub">
+      20-minute live demo. No slides. AgentPulse running against
+      a real agent estate — 23 agents, live drift events,
+      reasoning loop executing in real time.
+    </p>
+    <div class="cta-actions">
+      <a href="mailto:demo@agentpulse.live" class="btn-primary">
+        <span>→</span> Request Live Demo
+      </a>
+      <a href="mailto:demo@agentpulse.live" class="btn-ghost">
+        Partnership Inquiry
+      </a>
+    </div>
+    <div style="margin-top:32px;font-family:'DM Mono',monospace;font-size:8.5px;color:var(--t3);letter-spacing:0.12em;">
+      VENTURE VERTEX LLC · DALLAS, TX · demo@agentpulse.live
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Agent<span>Pulse</span>™</div>
+  <div class="footer-copy">© 2026 VENTURE VERTEX LLC · AGENTPULSE.LIVE · ALL RIGHTS RESERVED</div>
+  <div class="footer-links">
+    <a href="#problem">Platform</a>
+    <a href="#how">How It Works</a>
+    <a href="mailto:demo@agentpulse.live">Contact</a>
+  </div>
+</footer>
+
+<script>
+// ── CURSOR ──────────────────────────────────────────────
+const cursor     = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursorRing');
+let mx=0, my=0, rx=0, ry=0;
+
+document.addEventListener('mousemove', e=>{
+  mx=e.clientX; my=e.clientY;
+  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+});
+function animRing(){
+  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+  cursorRing.style.left=rx+'px'; cursorRing.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.classList.add('active');cursorRing.classList.add('active');});
+  el.addEventListener('mouseleave',()=>{cursor.classList.remove('active');cursorRing.classList.remove('active');});
+});
+
+// ── BACKGROUND PARTICLES ────────────────────────────────
+const bgCanvas = document.getElementById('bg-canvas');
+const bgCtx    = bgCanvas.getContext('2d');
+let bgW, bgH, particles=[];
+
+function resizeBg(){
+  bgW=bgCanvas.width=window.innerWidth;
+  bgH=bgCanvas.height=window.innerHeight;
+}
+resizeBg();
+window.addEventListener('resize', resizeBg);
+
+for(let i=0;i<80;i++){
+  particles.push({
+    x:Math.random()*window.innerWidth,
+    y:Math.random()*window.innerHeight,
+    r:Math.random()*1.5+0.3,
+    vx:(Math.random()-0.5)*0.3,
+    vy:(Math.random()-0.5)*0.3,
+    alpha:Math.random()*0.3+0.05,
+  });
+}
+
+function drawBg(){
+  bgCtx.clearRect(0,0,bgW,bgH);
+
+  // Connections
+  for(let i=0;i<particles.length;i++){
+    for(let j=i+1;j<particles.length;j++){
+      const dx=particles[i].x-particles[j].x;
+      const dy=particles[i].y-particles[j].y;
+      const dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<140){
+        const alpha=(1-dist/140)*0.06;
+        bgCtx.strokeStyle=`rgba(118,185,0,${alpha})`;
+        bgCtx.lineWidth=0.5;
+        bgCtx.beginPath();
+        bgCtx.moveTo(particles[i].x,particles[i].y);
+        bgCtx.lineTo(particles[j].x,particles[j].y);
+        bgCtx.stroke();
+      }
+    }
+  }
+
+  // Dots
+  particles.forEach(p=>{
+    bgCtx.fillStyle=`rgba(118,185,0,${p.alpha})`;
+    bgCtx.beginPath();
+    bgCtx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    bgCtx.fill();
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0)p.x=bgW; if(p.x>bgW)p.x=0;
+    if(p.y<0)p.y=bgH; if(p.y>bgH)p.y=0;
+  });
+
+  requestAnimationFrame(drawBg);
+}
+drawBg();
+
+// ── PULSE WAVEFORM ──────────────────────────────────────
+const pc  = document.getElementById('pulse-canvas');
+const pCtx= pc.getContext('2d');
+let pt=0;
+
+function resizePulse(){
+  pc.width=pc.offsetWidth*devicePixelRatio;
+  pc.height=pc.offsetHeight*devicePixelRatio;
+  pCtx.scale(devicePixelRatio,devicePixelRatio);
+}
+resizePulse();
+
+function drawPulse(){
+  const w=pc.offsetWidth, h=pc.offsetHeight;
+  pCtx.clearRect(0,0,w,h);
+  pt+=0.025;
+
+  // Grid lines
+  pCtx.strokeStyle='rgba(118,185,0,0.05)';
+  pCtx.lineWidth=1;
+  for(let x=0;x<w;x+=60){
+    pCtx.beginPath();pCtx.moveTo(x,0);pCtx.lineTo(x,h);pCtx.stroke();
+  }
+  for(let y=0;y<h;y+=30){
+    pCtx.beginPath();pCtx.moveTo(0,y);pCtx.lineTo(w,y);pCtx.stroke();
+  }
+
+  // Multiple agent waveforms
+  const agents=[
+    {color:'rgba(118,185,0,',freq:1.2,amp:28,phase:0,y:0.35},
+    {color:'rgba(0,200,255,',freq:0.8,amp:20,phase:1.2,y:0.65},
+    {color:'rgba(118,185,0,',freq:2.1,amp:14,phase:2.4,y:0.5},
+  ];
+
+  agents.forEach(ag=>{
+    // Glow
+    const grad=pCtx.createLinearGradient(0,0,w,0);
+    grad.addColorStop(0,ag.color+'0)');
+    grad.addColorStop(0.3,ag.color+'0.6)');
+    grad.addColorStop(0.7,ag.color+'0.6)');
+    grad.addColorStop(1,ag.color+'0)');
+
+    pCtx.strokeStyle=grad;
+    pCtx.lineWidth=1.5;
+    pCtx.beginPath();
+    for(let x=0;x<w;x++){
+      const nx=x/w;
+      // Drift event in middle
+      const driftFactor = nx>0.35&&nx<0.65 ? 1+Math.sin((nx-0.35)*10)*0.6 : 1;
+      const yVal = h*ag.y + Math.sin(nx*12*ag.freq+pt+ag.phase)*ag.amp*driftFactor
+                          + Math.sin(nx*4+pt*0.5+ag.phase)*ag.amp*0.3;
+      x===0?pCtx.moveTo(x,yVal):pCtx.lineTo(x,yVal);
+    }
+    pCtx.stroke();
+  });
+
+  // Drift zone marker
+  const driftGrad=pCtx.createLinearGradient(w*0.35,0,w*0.65,0);
+  driftGrad.addColorStop(0,'rgba(255,149,0,0)');
+  driftGrad.addColorStop(0.5,'rgba(255,149,0,0.04)');
+  driftGrad.addColorStop(1,'rgba(255,149,0,0)');
+  pCtx.fillStyle=driftGrad;
+  pCtx.fillRect(w*0.35,0,w*0.3,h);
+
+  // DRIFT label
+  pCtx.fillStyle='rgba(255,149,0,0.5)';
+  pCtx.font='8px DM Mono';
+  pCtx.letterSpacing='2px';
+  pCtx.fillText('BEHAVIORAL DRIFT DETECTED',w*0.38,16);
+
+  requestAnimationFrame(drawPulse);
+}
+drawPulse();
+
+// ── HOW CANVAS ──────────────────────────────────────────
+const hc  = document.getElementById('how-canvas');
+const hCtx= hc.getContext('2d');
+let ht=0;
+const agentNodes=[];
+
+function resizeHow(){
+  hc.width=hc.offsetWidth*devicePixelRatio;
+  hc.height=hc.offsetHeight*devicePixelRatio;
+  hCtx.scale(devicePixelRatio,devicePixelRatio);
+  agentNodes.length=0;
+  const w=hc.offsetWidth, h=hc.offsetHeight;
+  const names=['FraudDetect','ClinicalAI','CostOpt','RiskAssess','HRBOT','SupportAI'];
+  const colors=['rgba(118,185,0,','rgba(0,200,255,','rgba(118,185,0,','rgba(255,149,0,','rgba(0,200,255,','rgba(118,185,0,'];
+  names.forEach((name,i)=>{
+    const angle=(i/names.length)*Math.PI*2 - Math.PI/2;
+    agentNodes.push({
+      x:w/2+Math.cos(angle)*w*0.35,
+      y:h/2+Math.sin(angle)*h*0.35,
+      name, color:colors[i],
+      pulse:Math.random()*Math.PI*2,
+      drifting:i===0||i===3,
+    });
+  });
+}
+resizeHow();
+
+function drawHow(){
+  const w=hc.offsetWidth, h=hc.offsetHeight;
+  hCtx.clearRect(0,0,w,h);
+  ht+=0.02;
+
+  // Center orchestrator
+  const cx=w/2, cy=h/2;
+  const orchPulse=Math.sin(ht)*0.3+0.7;
+  hCtx.fillStyle=`rgba(118,185,0,${orchPulse*0.1})`;
+  hCtx.beginPath(); hCtx.arc(cx,cy,50,0,Math.PI*2); hCtx.fill();
+  hCtx.strokeStyle=`rgba(118,185,0,${orchPulse*0.6})`;
+  hCtx.lineWidth=1; hCtx.beginPath(); hCtx.arc(cx,cy,50,0,Math.PI*2); hCtx.stroke();
+  hCtx.fillStyle='rgba(118,185,0,0.9)';
+  hCtx.font='bold 9px DM Mono'; hCtx.textAlign='center';
+  hCtx.fillText('ESTATE',cx,cy-3); hCtx.fillText('ORCH.',cx,cy+10);
+
+  // Connections + nodes
+  agentNodes.forEach((node,i)=>{
+    node.pulse+=0.03;
+    const dist=Math.sqrt((node.x-cx)**2+(node.y-cy)**2);
+    const flowPos=((ht*0.8+i*0.5)%1);
+    const flowX=cx+(node.x-cx)*flowPos;
+    const flowY=cy+(node.y-cy)*flowPos;
+
+    // Connection line
+    const lineAlpha=node.drifting?0.6:0.15;
+    const lineColor=node.drifting?`rgba(255,149,0,${lineAlpha})`:`rgba(118,185,0,${lineAlpha})`;
+    hCtx.strokeStyle=lineColor;
+    hCtx.lineWidth=node.drifting?1.5:0.8;
+    hCtx.setLineDash(node.drifting?[4,4]:[]);
+    hCtx.beginPath(); hCtx.moveTo(cx,cy); hCtx.lineTo(node.x,node.y); hCtx.stroke();
+    hCtx.setLineDash([]);
+
+    // Flow particle
+    hCtx.fillStyle=node.drifting?'rgba(255,149,0,0.8)':'rgba(118,185,0,0.6)';
+    hCtx.beginPath(); hCtx.arc(flowX,flowY,2,0,Math.PI*2); hCtx.fill();
+
+    // Node circle
+    const pulse=Math.sin(node.pulse)*0.3+0.7;
+    const nodeColor=node.drifting?'rgba(255,149,0,':'rgba(0,200,255,';
+    hCtx.fillStyle=`${nodeColor}${pulse*0.12})`;
+    hCtx.beginPath(); hCtx.arc(node.x,node.y,24,0,Math.PI*2); hCtx.fill();
+    hCtx.strokeStyle=`${nodeColor}${pulse*0.7})`;
+    hCtx.lineWidth=1.5;
+    hCtx.beginPath(); hCtx.arc(node.x,node.y,24,0,Math.PI*2); hCtx.stroke();
+
+    // Quality indicator
+    const q=node.drifting?62+Math.sin(ht+i)*8:88+Math.sin(ht+i)*4;
+    hCtx.fillStyle=node.drifting?'rgba(255,149,0,0.9)':'rgba(0,200,255,0.9)';
+    hCtx.font='bold 10px Syne'; hCtx.textAlign='center';
+    hCtx.fillText(Math.round(q)+'%',node.x,node.y+3);
+
+    // Name
+    const labelY=node.y>cy?node.y+40:node.y-32;
+    hCtx.fillStyle='rgba(237,242,247,0.5)';
+    hCtx.font='7px DM Mono'; hCtx.textAlign='center';
+    hCtx.fillText(node.name,node.x,labelY);
+  });
+
+  requestAnimationFrame(drawHow);
+}
+drawHow();
+
+// ── NAVBAR SCROLL ───────────────────────────────────────
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',scrollY>60);
+});
+
+// ── INTERSECTION OBSERVER ───────────────────────────────
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+    }
+  });
+}, {threshold:0.15});
+
+document.querySelectorAll('.reveal,.problem-card,.sol-card,.loop-step,.how-item').forEach(el=>io.observe(el));
+
+// ── COUNTER ANIMATION ───────────────────────────────────
+const statIo = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const el=e.target;
+      const target=parseInt(el.dataset.target);
+      const prefix=el.dataset.prefix||'';
+      const suffix=el.dataset.suffix||'';
+      let current=0;
+      const inc=target/60;
+      const timer=setInterval(()=>{
+        current=Math.min(current+inc,target);
+        el.textContent=prefix+Math.round(current)+suffix;
+        if(current>=target)clearInterval(timer);
+      },16);
+      statIo.unobserve(el);
+    }
+  });
+},{threshold:0.5});
+
+document.querySelectorAll('[data-target]').forEach(el=>statIo.observe(el));
+
+// ── HOW IT WORKS INTERACTION ────────────────────────────
+const howItems=document.querySelectorAll('.how-item');
+howItems.forEach((item,i)=>{
+  item.addEventListener('click',()=>{
+    howItems.forEach(h=>h.classList.remove('active'));
+    item.classList.add('active');
+  });
+});
+if(howItems[0]) howItems[0].classList.add('active');
+
+// ── HEALTH SCORE ANIMATION ──────────────────────────────
+let hs=82;
+setInterval(()=>{
+  hs=74+Math.round(Math.sin(Date.now()/8000)*8);
+  const el=document.getElementById('healthScore');
+  if(el) el.textContent=hs;
+},2000);
+</script>
+</body>
+</html>
