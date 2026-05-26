@@ -20,6 +20,7 @@
   --nv-dim:  rgba(118,185,0,0.12);
   --nv-glow: rgba(118,185,0,0.25);
   --blue:    #0EA5E9;
+  --amber:   #F59E0B;
   --white:   #F0F4F8;
   --t1:      #E2EAF4;
   --t2:      rgba(226,234,244,0.65);
@@ -600,7 +601,7 @@ footer {
     <a href="#contact">Contact</a>
   </div>
   <div class="nav-cta">
-    <a href="#contact" class="btn-sm btn-sm-ghost">Partner Inquiry</a>
+    <a href="AgentPulse_ROI_Calculator.html" target="_blank" class="btn-sm btn-sm-ghost" style="border-color:rgba(118,185,0,0.3);color:var(--nv);">ROI Calculator</a>
     <a href="#contact" class="btn-sm btn-sm-solid">Request Demo →</a>
   </div>
 </nav>
@@ -618,11 +619,12 @@ footer {
         NVIDIA AI FACTORY NATIVE · LIVE AT AGENTPULSE.LIVE
       </div>
       <h1>
-        Your AI agents are running.<br>
-        <em>Are they behaving?</em>
+        Silent failure is the<br>
+        <em>real AI risk.</em>
       </h1>
       <p class="hero-sub">
-        AgentPulse™ is the behavioral intelligence platform for enterprise AI Factories — detecting drift, resolving conflicts, and autonomously remediating agent failures before they become business problems.
+        Your GPU is up. Your API is responding. Your latency is normal. And your AI agent has been silently wrong for six hours.
+        AgentPulse™ catches it in under 5 minutes — tells you exactly why — and fixes it in under 60 seconds. Natively on NVIDIA AI Factory.
       </p>
       <div class="hero-actions">
         <a href="#contact" class="btn-primary">
@@ -736,7 +738,7 @@ footer {
 <div class="stats-strip">
   <div class="stats-inner">
     <div class="stat-item">
-      <div class="stat-num" data-target="60" data-suffix="s">&lt;60s</div>
+      <div class="stat-num">&lt;60s</div>
       <div class="stat-label">MEAN TIME TO<br>REMEDIATION</div>
     </div>
     <div class="stat-item">
@@ -815,8 +817,8 @@ footer {
   <div class="section-inner">
     <div class="reveal" style="text-align:center;max-width:680px;margin:0 auto;">
       <div class="section-eyebrow" style="justify-content:center;text-align:center;">THE PLATFORM</div>
-      <h2 class="section-h2">Six reasoning agents.<br><em>One unified intelligence.</em></h2>
-      <p class="section-lead" style="margin:0 auto;">Each agent runs an 8-step causal loop — OBSERVE → HYPOTHESIZE → QUERY → REASON → PLAN → ACT → VERIFY → REPORT. When an agent drifts, AgentPulse doesn't alert. It reasons, generates the fix, and deploys it.</p>
+      <h2 class="section-h2">Not an alert.<br><em>A root cause.</em></h2>
+      <p class="section-lead" style="margin:0 auto;">Most platforms tell you something is wrong. AgentPulse tells you why, what it will cost if you wait another hour, and what the exact parameter change is to fix it — then deploys it autonomously in under 60 seconds. Six specialized reasoning agents. One 8-step causal loop. NVIDIA AI Factory native.</p>
     </div>
     <div class="agents-grid">
       <div class="agent-card" style="transition-delay:0.05s">
@@ -824,48 +826,99 @@ footer {
         <div class="agent-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" transform="rotate(45 12 12)"/></svg></div>
         <div class="agent-name">Drift Analyst</div>
         <div class="agent-desc">Root-causes behavioral drift with 8-step causal reasoning. Doesn't alert — it explains why, names the causal chain, and quantifies dollar impact in under 60 seconds.</div>
-        <span class="agent-tag">OBSERVE → REPORT</span>
+        <span class="agent-tag">COUNTERFACT STEP</span>
       </div>
       <div class="agent-card" style="transition-delay:0.1s">
         <div class="agent-num">AGENT 02</div>
         <div class="agent-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 7 22 17 12 22 2 17 2 7"/></svg></div>
         <div class="agent-name">Conflict Resolver</div>
         <div class="agent-desc">Determines which agent's instruction is authoritative when pipelines contradict. Generates PulseSync arbitration policy automatically with confidence score.</div>
-        <span class="agent-tag">REAL-TIME</span>
+        <span class="agent-tag">TEMPORAL DETECTION</span>
       </div>
       <div class="agent-card" style="transition-delay:0.15s">
         <div class="agent-num">AGENT 03</div>
         <div class="agent-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 12 12 22 2 12"/></svg></div>
         <div class="agent-name">Remediation Architect</div>
         <div class="agent-desc">Designs the minimum-effective OpenShell policy — smallest parameter change that restores quality without disrupting downstream agents. One-click or autonomous.</div>
-        <span class="agent-tag">AUTO-DEPLOY</span>
+        <span class="agent-tag">PRE-DEPLOY SIM</span>
       </div>
       <div class="agent-card" style="transition-delay:0.2s">
         <div class="agent-num">AGENT 04</div>
         <div class="agent-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg></div>
         <div class="agent-name">Cost Intelligence</div>
         <div class="agent-desc">Reasons about whether inference spend is justified by business outcomes — not tokens. Surfaces routing changes worth $150K–$500K annually per enterprise estate.</div>
-        <span class="agent-tag">CFO LANGUAGE</span>
+        <span class="agent-tag">PwC COHORT BENCH</span>
       </div>
       <div class="agent-card" style="transition-delay:0.25s">
         <div class="agent-num">AGENT 05</div>
         <div class="agent-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg></div>
         <div class="agent-name">Fitness Assessor</div>
         <div class="agent-desc">Benchmarks the estate against PwC's top-20% AI performance cohort. Builds a longitudinal improvement hypothesis and 12-week sequenced roadmap.</div>
-        <span class="agent-tag">PwC BENCHMARK</span>
+        <span class="agent-tag">W/W TRAJECTORY</span>
       </div>
       <div class="agent-card" style="transition-delay:0.3s">
         <div class="agent-num">AGENT 06</div>
         <div class="agent-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
         <div class="agent-name">Estate Orchestrator</div>
         <div class="agent-desc">The meta-agent. Coordinates all five specialists. Decides which agents to invoke and in what order. Maintains a working theory about the estate's health trajectory.</div>
-        <span class="agent-tag">MASTER INTELLIGENCE</span>
+        <span class="agent-tag">DAILY 7AM BRIEF</span>
       </div>
     </div>
   </div>
 </section>
 
 <!-- REASONING LOOP -->
+
+<!-- NEW CAPABILITIES — Sprint A through E -->
+<section class="section" style="background:var(--bg2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;max-width:700px;margin:0 auto;">
+      <div class="section-eyebrow" style="justify-content:center;">SPRINT A — E · LATEST CAPABILITIES</div>
+      <h2 class="section-h2" style="text-align:center;">Predictive. Proactive.<br><em>Production-ready.</em></h2>
+      <p class="section-lead" style="margin:0 auto;">Five sprint cycles of new capabilities — from predicting drift before it happens to governing shadow AI and connecting to every orchestration framework.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:56px;">
+
+      <div class="nvidia-card reveal" style="transition-delay:0.05s;border-color:rgba(118,185,0,0.2);">
+        <div class="nc-label" style="color:var(--nv);">SPRINT A · PULSEFORE CAST™</div>
+        <div class="nc-title">Predictive Drift</div>
+        <div class="nc-body">GPU memory &gt;88%? Quality degradation predicted in ~20 minutes. Drift velocity accelerating? Breach forecast in 3.2 hours. Three-algorithm ensemble — Linear + EWMA + Velocity scoring. Intervene before the threshold is crossed.</div>
+      </div>
+
+      <div class="nvidia-card reveal" style="transition-delay:0.1s;border-color:rgba(118,185,0,0.2);">
+        <div class="nc-label" style="color:var(--nv);">SPRINT B · PULSEREGISTRY™</div>
+        <div class="nc-title">Agent Registry + Shadow AI</div>
+        <div class="nc-body">Central registry for every AI agent: governance tier, owner, lifecycle state, EU AI Act classification. Auto-discovers unregistered NIM endpoints in K8s clusters. Shadow agent found? Governance alert fires immediately — you can't govern what you can't see.</div>
+      </div>
+
+      <div class="nvidia-card reveal" style="transition-delay:0.15s;border-color:rgba(14,165,233,0.2);">
+        <div class="nc-label" style="color:var(--blue);">SPRINT C · MCP SERVER v2</div>
+        <div class="nc-title">MCP + A2A Protocol</div>
+        <div class="nc-body">AgentPulse as an MCP server — any orchestration framework (LangChain, AutoGen, CrewAI, Vertex AI, Nutanix) can call behavioral intelligence as a tool. A2A protocol: orchestrators query AgentPulse before delegating tasks. Cross-framework telemetry normalization.</div>
+      </div>
+
+      <div class="nvidia-card reveal" style="transition-delay:0.2s;border-color:rgba(245,158,11,0.2);">
+        <div class="nc-label" style="color:var(--amber, #F59E0B);">SPRINT D · PULSEAPPROVE™</div>
+        <div class="nc-title">Human-in-the-Loop Governance</div>
+        <div class="nc-body">Policy-as-code in YAML. CRITICAL agents require CISO + AI Lead approval in 5 minutes or auto-escalate. STANDARD agents auto-approve within policy bounds. Every decision has a full explainability report: WHY flagged, WHAT evidence, WHAT will happen, REVERSIBLE: yes.</div>
+      </div>
+
+      <div class="nvidia-card reveal" style="transition-delay:0.25s;border-color:rgba(118,185,0,0.2);">
+        <div class="nc-label" style="color:var(--nv);">SPRINT E · REASONING v2</div>
+        <div class="nc-title">Deeper Agent Intelligence</div>
+        <div class="nc-body">Every agent upgraded: counterfactual reasoning, temporal conflict detection, pre-deployment simulation, PwC cohort benchmarking, week-over-week trajectory, and a 7am proactive estate brief. Each agent now knows what it would have done differently an hour earlier.</div>
+      </div>
+
+      <div class="nvidia-card reveal" style="transition-delay:0.3s;border-color:rgba(14,165,233,0.2);">
+        <div class="nc-label" style="color:var(--blue);">ROI CALCULATOR</div>
+        <div class="nc-title">Your Numbers. Not Ours.</div>
+        <div class="nc-body">Interactive ROI calculator: enter your agents, daily inference cost, current MTTR, and business value per hour. Every formula shown. Every input yours. Auditable methodology your CFO can validate. No assumed numbers, no black box.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <div class="loop-section">
   <div class="loop-inner">
     <div class="reveal" style="text-align:center;margin-bottom:0;">
@@ -958,6 +1011,10 @@ footer {
           <tr><td>Cost-per-outcome attribution</td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td><span class="partial">Partial</span></td><td><span class="partial">Partial</span></td><td class="col-ap"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#76B900" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span></td></tr>
           <tr><td>AI Fitness Index (PwC benchmark)</td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td class="col-ap"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#76B900" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span></td></tr>
           <tr><td>EU AI Act session audit trail</td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td class="col-ap"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#76B900" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span></td></tr>
+          <tr><td>Predictive drift (before threshold breach)</td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td class="col-ap"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#76B900" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span></td></tr>
+          <tr><td>Shadow AI detection + agent registry</td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td class="col-ap"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#76B900" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span></td></tr>
+          <tr><td>MCP server + A2A protocol support</td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td class="col-ap"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#76B900" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span></td></tr>
+          <tr><td>HITL approval workflows (policy-as-code)</td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td><span class="cross"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span></td><td class="col-ap"><span class="check"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#76B900" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></span></td></tr>
         </tbody>
       </table>
     </div>
@@ -1010,9 +1067,9 @@ footer {
 <div class="quote-section">
   <div class="quote-inner reveal">
     <p class="quote-text">
-      "The only platform looking at this problem at this depth. <strong>Behavioral governance for AI agents</strong> is the gap the entire industry is about to realize it has."
+      "The infrastructure passed every health check. GPU nominal, API responding, latency within SLA. Our fraud detection agent had been wrong for six hours. AgentPulse caught it in four minutes, traced it to GPU memory pressure, and deployed the fix autonomously. <strong>MTTR: 47 seconds. Our team found out in the post-incident report.</strong>"
     </p>
-    <div class="quote-attr">FRANK DICKSON · GROUP VICE PRESIDENT, IDC RESEARCH</div>
+    <div class="quote-attr">AI PLATFORM LEAD · FINANCIAL SERVICES · NVIDIA AI FACTORY DEPLOYMENT</div>
   </div>
 </div>
 
@@ -1021,8 +1078,8 @@ footer {
   <div class="section-inner">
     <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto;">
       <div class="section-eyebrow" style="justify-content:center;">PRICING</div>
-      <h2 class="section-h2" style="text-align:center;">Simple, transparent<br><em>per-deployment pricing.</em></h2>
-      <p class="section-lead" style="margin:0 auto;text-align:center;">Start with a 30-day Proof of Value. Credited against your first annual contract.</p>
+      <h2 class="section-h2" style="text-align:center;">Start with your<br><em>numbers, not ours.</em></h2>
+      <p class="section-lead" style="margin:0 auto;text-align:center;">30-day Proof of Value on your live NIM estate. We bring the ROI Calculator — you enter your numbers. Every input is yours. Every formula is shown. Take it to your CFO.</p>
     </div>
     <div class="pricing-grid">
       <div class="pricing-card reveal">
@@ -1089,11 +1146,11 @@ footer {
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">FIRST NAME</label>
-            <input class="form-input" type="text" placeholder="Jane" required/>
+            <input class="form-input" type="text" placeholder="Vyasa" required/>
           </div>
           <div class="form-group">
             <label class="form-label">LAST NAME</label>
-            <input class="form-input" type="text" placeholder="Smith" required/>
+            <input class="form-input" type="text" placeholder="Murthy" required/>
           </div>
         </div>
         <div class="form-group">
@@ -1140,15 +1197,15 @@ footer {
         </div>
         <div class="contact-block">
           <h3><span class="cicon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span> Direct Contact</h3>
-          <p><a href="mailto:info@venture-vertex.com">info@venture-vertex.com</a></p>
+          <p><a href="mailto:vyasa.murthy@venture-vertex.com">vyasa.murthy@venture-vertex.com</a><br>Vyasa Murthy, Managing Partner</p>
         </div>
         <div class="contact-block">
           <h3><span class="cicon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Partnerships</h3>
-          <p>GSI partners, GPU cloud providers, NVIDIA ecosystem partners — <a href="mailto:info@venture-vertex.com?subject=Partnership Inquiry">contact us</a> for co-sell and resell programs.</p>
+          <p>GSI partners, GPU cloud providers, NVIDIA ecosystem partners — <a href="mailto:vyasa.murthy@venture-vertex.com?subject=Partnership Inquiry">contact us</a> for co-sell and resell programs.</p>
         </div>
         <div class="contact-block">
           <h3><span class="cicon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></span> For Analysts</h3>
-          <p>Gartner, Forrester, IDC — complimentary briefings available. <a href="mailto:info@venture-vertex.com?subject=Analyst Briefing Request">Request a briefing →</a></p>
+          <p>Gartner, Forrester, IDC — complimentary briefings available. <a href="mailto:vyasa.murthy@venture-vertex.com?subject=Analyst Briefing Request">Request a briefing →</a></p>
         </div>
         <div style="padding:20px;background:var(--nv-dim);border:1px solid var(--border);border-radius:10px;">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
@@ -1200,15 +1257,15 @@ footer {
         <h4>COMPANY</h4>
         <ul>
           <li><a href="#contact">Contact</a></li>
-          <li><a href="mailto:info@venture-vertex.com?subject=Partnership Inquiry">Partnerships</a></li>
-          <li><a href="mailto:info@venture-vertex.com?subject=Analyst Briefing">Analyst Briefings</a></li>
-          <li><a href="mailto:info@venture-vertex.com">Venture Vertex LLC</a></li>
+          <li><a href="mailto:vyasa.murthy@venture-vertex.com?subject=Partnership Inquiry">Partnerships</a></li>
+          <li><a href="mailto:vyasa.murthy@venture-vertex.com?subject=Analyst Briefing">Analyst Briefings</a></li>
+          <li><a href="mailto:vyasa.murthy@venture-vertex.com">Venture Vertex LLC</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© 2026 VENTURE VERTEX LLC. ALL RIGHTS RESERVED. · AGENTPULSE™</span>
-      <span>NVIDIA AI FACTORY NATIVE &nbsp;·&nbsp; ANTHROPIC CLAUDE POWERED &nbsp;·&nbsp; IDC VALIDATED &nbsp;·&nbsp; DALLAS, TEXAS</span>
+      <span>NVIDIA AI FACTORY NATIVE &nbsp;·&nbsp; MCP + A2A PROTOCOL &nbsp;·&nbsp; ANTHROPIC CLAUDE POWERED &nbsp;·&nbsp; SPRINT 70+ ACTIVE &nbsp;·&nbsp; DALLAS, TEXAS</span>
     </div>
   </div>
 </footer>
